@@ -26,6 +26,7 @@ Mini projet de test technique Spring Boot - Gestion des contrats.
 ## Bonus
 
     ✅ Filtrage des contrats par status via '?status='
+    ✅ Ajout d’une documentation Swagger
 
 ## clone le projet
 ```bash
@@ -36,3 +37,6 @@ cd SpringBootStarter
 ```bash
 mvn spring-boot:run
 ```
+
+## API Documetation
+vous pouvez accéder à la documentation interactive de l'API via Swagger UI à l'adresse : [http://127.0.0.1:8080/swagger-ui.html]
