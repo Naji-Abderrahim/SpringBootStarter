@@ -23,6 +23,9 @@ Mini projet de test technique Spring Boot - Gestion des contrats.
 
     ✅ La date de fin du contrat ne peut pas précéder la date de début.
 
+## Bonus
+
+    ✅ Filtrage des contrats par status via '?status='
 
 ## clone le projet
 ```bash
