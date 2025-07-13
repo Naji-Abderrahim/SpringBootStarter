@@ -16,7 +16,7 @@ public class ContractServices {
 
 	private void validateContractInfo(Contract contract) {
 		if (!contract.isDateCorrect()) {
-			throw new IllegalStateException("Start Date is bigger then End");
+			throw new IllegalStateException("Start Date is bigger then End Date");
 		}
 		if (contract.getTitle().isEmpty()) {
 			throw new IllegalStateException("Title is Empty");
@@ -57,6 +57,7 @@ public class ContractServices {
 	}
 
 	public Contract getContractByIdAndStatus(Long id, String contractState) {
+		System.out.println("I m Getting ID " + id + "And Status " + contractState);
 		Optional<Contract> optContract;
 		if (contractState == null)
 			optContract = contractRepo.findById(id);

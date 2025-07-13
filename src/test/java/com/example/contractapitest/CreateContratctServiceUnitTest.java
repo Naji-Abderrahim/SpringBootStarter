@@ -75,5 +75,14 @@ public class CreateContratctServiceUnitTest {
 
 		assertEquals(expectedError, exception.getMessage());
 	}
+	@Test
+	void createContractWithNull() {
+
+		Contract invalidContract = null;
+
+		assertThrows(
+				NullPointerException.class,
+				() -> contractService.createContract(invalidContract));
+	}
 
 }
