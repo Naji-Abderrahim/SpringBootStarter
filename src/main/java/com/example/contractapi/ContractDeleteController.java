@@ -12,7 +12,6 @@ public class ContractDeleteController {
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteContract(@PathVariable Long id) {
-		System.out.println("I m deleting Contract With ID " + id);
 		if (contractRepository.existsById(id)) {
 			contractRepository.deleteById(id);
 			return ResponseEntity.noContent().build();
