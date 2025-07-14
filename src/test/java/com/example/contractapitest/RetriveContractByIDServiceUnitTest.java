@@ -1,9 +1,6 @@
 package com.example.contractapitest;
 
-import java.lang.module.ModuleDescriptor.Exports;
 import java.time.LocalDate;
-
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Nested;
@@ -36,20 +33,12 @@ public class RetriveContractByIDServiceUnitTest {
 		assertThrows(
 				EmptyResultDataAccessException.class,
 				() -> contractService.getContractByIdAndStatus(1L, null));
-		// Contract contract = new Contract();
-		//
-		// when(contractRepository.findById(1L).get()).thenReturn(contract);
-		//
-		// Contract result = contractService.getContractByIdAndStatus(1L, null);
-		//
-		// assertEquals(contract, result);
 	}
 
 	@Test
 	void getContractByIdTest() {
 
 		Contract contract = new Contract(
-				1L,
 				"testTitle 1",
 				"TestClientName 1",
 				LocalDate.of(2020, 6, 1),
@@ -67,7 +56,6 @@ public class RetriveContractByIDServiceUnitTest {
 	void getContractByIdWithStatusTest() {
 
 		Contract contract = new Contract(
-				1L,
 				"testTitle 1",
 				"TestClientName 1",
 				LocalDate.of(2021, 6, 1),

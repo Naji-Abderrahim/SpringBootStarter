@@ -1,22 +1,26 @@
 package com.example.contractapi;
 
 import org.springframework.web.bind.annotation.*;
+
+import java.net.HttpCookie;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/contracts")
 public class ContractDeleteController {
     @Autowired
-    private ContractRepository contractRepository;
+    private ContractServices contractService;
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteContract(@PathVariable Long id) {
-		if (contractRepository.existsById(id)) {
-			contractRepository.deleteById(id);
+	public ResponseEntity<?> deleteContract(@PathVariable Long id) {
+		try {
+			contractService.deleteContract(id);
 			return ResponseEntity.noContent().build();
-		} else {
-			return ResponseEntity.notFound().build();
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: " + e.getMessage());
 		}
 	}
 }

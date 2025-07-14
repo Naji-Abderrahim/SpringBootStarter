@@ -26,7 +26,8 @@ Mini projet de test technique Spring Boot - Gestion des contrats.
 ## Bonus
 
     ✅ Filtrage des contrats par status via '?status='
-    ✅ Ajout d’une documentation Swagger
+    ✅ Api Documetation via Swagger-ui
+    ✅ Tests unitaires simples sur la couche service
 
 ## clone le projet
 ```bash
@@ -36,6 +37,11 @@ cd SpringBootStarter
 ## Lancer le projet
 ```bash
 mvn spring-boot:run
+
+```
+## Lancer les tests unitaires
+```bash
+mvn test
 ```
 
 ## API Documetation

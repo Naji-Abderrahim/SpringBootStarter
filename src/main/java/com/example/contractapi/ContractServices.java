@@ -57,7 +57,6 @@ public class ContractServices {
 	}
 
 	public Contract getContractByIdAndStatus(Long id, String contractState) {
-		System.out.println("I m Getting ID " + id + "And Status " + contractState);
 		Optional<Contract> optContract;
 		if (contractState == null)
 			optContract = contractRepo.findById(id);
@@ -70,5 +69,12 @@ public class ContractServices {
 		} else {
 			throw new EmptyResultDataAccessException("Contract does not exist" , 1);
 		}
+	}
+
+	public void deleteContract(Long id) {
+		if (!contractRepo.existsById(id)) {
+			throw new EmptyResultDataAccessException("Contract does not exist", 1);
+		}
+		contractRepo.deleteById(id);
 	}
 }

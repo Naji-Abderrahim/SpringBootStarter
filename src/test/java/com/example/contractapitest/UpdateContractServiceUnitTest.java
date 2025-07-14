@@ -1,6 +1,8 @@
 package com.example.contractapitest;
 
 import java.time.LocalDate;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -16,7 +18,7 @@ import com.example.contractapi.*;
 
 @ExtendWith(MockitoExtension.class)
 @Nested
-public class CreateContratctServiceUnitTest {
+public class UpdateContractServiceUnitTest {
 
 	@Mock
 	private ContractRepository contractRepository;
@@ -25,23 +27,31 @@ public class CreateContratctServiceUnitTest {
 	private ContractServices contractService;
 
 	@Test
-	void createContractWithValidInfoTest() {
+	void updateContractWithValidInfoTest() {
 
-		Contract contract = new Contract(
-				"testTitle",
-				"TestClientName",
+		Contract oldContract = new Contract(
+				"oldTitle",
+				"oldClientName",
 				LocalDate.of(2020, 6, 1),
 				LocalDate.of(2023, 6, 1),
 				ContractStatus.DRAFT);
-		when(contractRepository.save(contract)).thenReturn(contract);
+		Contract newContract = new Contract(
+				"newTitle",
+				"newClientName",
+				LocalDate.of(2020, 6, 1),
+				LocalDate.of(2023, 6, 1),
+				ContractStatus.ACTIVE);
 
-		Contract result = contractService.createContract(contract);
+		when(contractRepository.findById(1L)).thenReturn(Optional.of(oldContract));
+		when(contractRepository.save(oldContract)).thenReturn(newContract);
 
-		assertEquals(contract, result);
+		Contract result = contractService.updateContract(1L, newContract);
+
+		assertEquals(newContract, result);
 	}
 
 	@Test
-	void createContractWithEmptyTitle() {
+	void updateContractWithEmptyTitle() {
 
 		String expectedError = "Title is Empty";
 		Contract invalidContract = new Contract(
@@ -53,31 +63,31 @@ public class CreateContratctServiceUnitTest {
 
 		Exception exception = assertThrows(
 				IllegalStateException.class,
-				() -> contractService.createContract(invalidContract));
+				() -> contractService.updateContract(1L, invalidContract));
 
 		assertEquals(expectedError, exception.getMessage());
 	}
 
 	@Test
-	void createContractWithInvalidDate() {
+	void updateContractWithInvalidDate() {
 
 		String expectedError = "Start Date is bigger then End Date";
 		Contract invalidContract = new Contract(
-				"TestTitle",
+				"TestTiltle",
 				"TestClientName",
 				LocalDate.of(2020, 6, 1),
-				LocalDate.of(2010, 6, 1),
+				LocalDate.of(2019, 6, 1),
 				ContractStatus.DRAFT);
 
 		Exception exception = assertThrows(
 				IllegalStateException.class,
-				() -> contractService.createContract(invalidContract));
+				() -> contractService.updateContract(1L, invalidContract));
 
 		assertEquals(expectedError, exception.getMessage());
 	}
 
 	@Test
-	void createContractWithEmptyClientName() {
+	void UpdateContractWithEmptyClientName() {
 
 		String expectedError = "Client Name is Empty";
 		Contract invalidContract = new Contract(
@@ -89,19 +99,18 @@ public class CreateContratctServiceUnitTest {
 
 		Exception exception = assertThrows(
 				IllegalStateException.class,
-				() -> contractService.createContract(invalidContract));
+				() -> contractService.updateContract(1L, invalidContract));
 
 		assertEquals(expectedError, exception.getMessage());
 	}
 
 	@Test
-	void createContractWithNull() {
+	void updateContractWithNull() {
 
 		Contract invalidContract = null;
 
 		assertThrows(
 				NullPointerException.class,
-				() -> contractService.createContract(invalidContract));
+				() -> contractService.updateContract(1L, invalidContract));
 	}
-
 }

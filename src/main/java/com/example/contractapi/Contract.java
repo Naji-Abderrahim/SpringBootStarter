@@ -31,14 +31,14 @@ public class Contract {
 	}
 
 	// this Constructor for test only
-	public Contract(Long id, String title, String clientName, LocalDate sDate, LocalDate edate, ContractStatus state) {
-		this.id = id;
-		this.title = title;
-		this.clientName = clientName;
-		this.startDate = sDate;
-		this.endDate = edate;
-		this.status = state;
-	}
+	// public Contract(Long id, String title, String clientName, LocalDate sDate, LocalDate edate, ContractStatus state) {
+	// 	this.id = id;
+	// 	this.title = title;
+	// 	this.clientName = clientName;
+	// 	this.startDate = sDate;
+	// 	this.endDate = edate;
+	// 	this.status = state;
+	// }
 
 	public Contract(String title, String clientName, LocalDate sDate, LocalDate edate, ContractStatus state) {
 		// this.id = id;
